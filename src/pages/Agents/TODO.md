@@ -1,0 +1,2 @@
+- [x] Create .gitignore file in root directory and add .env to it to prevent uploading to GitHub
+- [x] Create README.md file with project description, setup instructions, and how to run

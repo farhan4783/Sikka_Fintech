@@ -1,0 +1,506 @@
+.profile-page {
+    /* padding: 20px; */
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.profile-section {
+    margin-bottom: 40px;
+}
+
+/* Bills Grid */
+.bills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.bill-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+}
+
+.bill-card::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 60px;
+    border-radius: 4px 0 0 4px;
+}
+
+.bill-card.blue::before {
+    background: #3b82f6;
+}
+
+.bill-card.grey::before {
+    background: #a0aec0;
+}
+
+.bill-card.red::before {
+    background: #ef4444;
+}
+
+.bill-card.green::before {
+    background: #10b981;
+}
+
+.bill-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.bill-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e8f0;
+}
+
+.bill-percentage-circle {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.percentage-text {
+    font-size: 10px;
+    font-weight: 700;
+    position: absolute;
+}
+
+.circular-chart {
+    display: block;
+    margin: 10px auto;
+    max-width: 100%;
+    max-height: 250px;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 3.8;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    animation: progress 1s ease-out forwards;
+}
+
+.bill-card.blue .circle {
+    stroke: #3b82f6;
+}
+
+.bill-card.grey .circle {
+    stroke: #a0aec0;
+}
+
+.bill-card.red .circle {
+    stroke: #ef4444;
+}
+
+.bill-card.green .circle {
+    stroke: #10b981;
+}
+
+@keyframes progress {
+    0% {
+        stroke-dasharray: 0 100;
+    }
+}
+
+.bill-title {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 12px 0 8px;
+}
+
+.bill-value {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.bill-subvalue {
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.bill-footer-text {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+}
+
+
+/* Invoices Grid */
+.invoices-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 24px;
+}
+
+/* Amount Owed Card */
+.amount-owed-card {
+    background: linear-gradient(135deg, #6b46c1 0%, #805ad5 100%);
+    border-radius: 20px;
+    padding: 30px;
+    color: white;
+    height: 100%;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(107, 70, 193, 0.4);
+}
+
+.dots-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.gauge-container {
+    position: relative;
+    width: 200px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 40px;
+}
+
+.semi-circle-gauge {
+    width: 200px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 100px 100px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.gauge-fill {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #c3dafe;
+    /* Light neon color */
+    transform-origin: center top;
+    transition: transform 1s ease-out;
+}
+
+.gauge-cover {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 80px;
+    background: #6b46c1;
+    /* Match card bg to create arc effect */
+    border-radius: 80px 80px 0 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.gauge-icon {
+    position: absolute;
+    bottom: 0;
+    background: #805ad5;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    margin-bottom: -15px;
+    /* Pull down */
+}
+
+.gauge-percentage {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.owed-content {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.owed-label {
+    opacity: 0.8;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.owed-amount {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.owed-sub {
+    opacity: 0.8;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+
+/* Invoice Stat Cards */
+.invoices-col.middle {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.invoice-stat-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+}
+
+.invoice-stat-card::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 50px;
+    border-radius: 4px 0 0 4px;
+    background: #1a202c;
+    /* Default dark */
+}
+
+
+
+/* If you use the prop passed 'color="purple"' to change side bar: */
+.invoice-stat-card:has(.purple-indicator)::before {
+    background: #805ad5;
+}
+
+
+.stat-card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.stat-icon-wrapper {
+    width: 36px;
+    height: 36px;
+    background: #edF2f7;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-title {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.stat-amount {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.stat-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.percentage-text-small {
+    font-size: 12px;
+    font-weight: 700;
+    background: #f7fafc;
+    padding: 4px 8px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+
+/* Profile Chart */
+.profile-chart-card {
+    background: var(--bg-card);
+    /* Or glass effect as per image with shadow */
+    border-radius: 20px;
+    padding: 24px;
+    height: 100%;
+    position: relative;
+    /* backdrop-filter: blur(10px); */
+    /* background: rgba(255, 255, 255, 0.8); */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.chart-badge {
+    background: #fff;
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+
+/* History Bar */
+.profile-history-bar {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--text-secondary);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.ph-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.ph-user img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.ph-status {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* Responsive */
+/* Responsive */
+@media (max-width: 1200px) {
+    .bills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .invoices-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .invoices-col {
+        min-height: auto;
+    }
+
+    .amount-owed-card {
+        min-height: 250px;
+    }
+
+    .invoices-col.middle {
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 768px) {
+    .bills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .invoices-col.middle {
+        flex-direction: column;
+    }
+
+    .profile-history-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px;
+    }
+
+    .profile-history-bar>span {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Simulate label for history items on mobile */
+    .profile-history-bar>span::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-right: 10px;
+    }
+
+    .ph-user {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .ph-status {
+        width: 100%;
+        text-align: center;
+        margin-top: 8px;
+    }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sikka AI – Agent Decision Simulator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+
+
+      <main class="main">
+        <header class="topbar">
+          <h3>Agent Chat</h3>
+        </header>
+
+        <section class="chat" id="chatArea">
+          <div class="message user">
+            Thinking of buying that ₹80k gaming laptop on EMI. Good idea?
+          </div>
+
+          <div class="message agent wolf">
+            <div class="agent-name">🐺 The Wolf (Market Analyst)</div>
+            <div class="agent-card green">
+              Financially feasible.<br />
+              12-month EMI is ₹7,200.<br />
+              Your freelance income covers this.
+            </div>
+          </div>
+
+          <div class="message agent sage">
+            <div class="agent-name">🧘 The Sage (Behavioral Coach)</div>
+            <div class="agent-card red">
+              Warning: This purchase delays your Europe trip goal by 5
+              months.<br />
+              High probability of buyer’s regret.
+            </div>
+          </div>
+        </section>
+
+        <div class="chat-bar">
+          <input type="text" id="userInput" placeholder="Ask FinSync AI..." />
+          <button id="sendBtn">➤</button>
+        </div>
+      </main>
+    </div>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>
