@@ -93,7 +93,11 @@ export const ExpenseChart = () => {
                     />
                     <Bar dataKey="value" radius={[4, 4, 4, 4]}>
                         {data.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.active ? '#1a1f3a' : '#1a1f3a'} fillOpacity={entry.name === 'MAR' ? 1 : (index % 2 === 0 ? 0.8 : 0.4)} />
+                            <Cell
+                                key={`cell-${index}`}
+                                fill={`var(--chart-bar)`}
+                                fillOpacity={entry.name === 'MAR' ? 1 : (index % 2 === 0 ? 0.65 : 0.35)}
+                            />
                         ))}
                     </Bar>
                 </BarChart>

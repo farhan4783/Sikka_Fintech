@@ -45,41 +45,40 @@ export default function Agents() {
     }
 
     return (
-        <div className="app">
-            <main className="main">
-                <header className="topbar">
-                    <h3>Agent Chat</h3>
-                </header>
+        <div className="agents-page">
+            <header className="agents-topbar">
+                <h3>Agent Team</h3>
+                <p className="agents-subtitle">Your AI-powered financial advisors</p>
+            </header>
 
-                <section className="chat" id="chatArea">
-                    {messages.map((msg, idx) => (
-                        <div key={idx} className={`message ${msg.type}`}>
-                            {msg.isAgent ? (
-                                <>
-                                    <div className="agent-name">{msg.name ? `${msg.name} (${msg.role})` : ''}</div>
-                                    <div className={`agent-card ${msg.color || ''}`}>
-                                        {msg.text.replace(msg.name ? '' : '', '')}
-                                    </div>
-                                </>
-                            ) : (
-                                msg.text
-                            )}
-                        </div>
-                    ))}
-                    <div ref={chatEndRef} />
-                </section>
+            <section className="chat" id="chatArea">
+                {messages.map((msg, idx) => (
+                    <div key={idx} className={`message ${msg.type}`}>
+                        {msg.isAgent ? (
+                            <>
+                                <div className="agent-name">{msg.name ? `${msg.name} (${msg.role})` : ''}</div>
+                                <div className={`agent-card ${msg.color || ''}`}>
+                                    {msg.text.replace(msg.name ? '' : '', '')}
+                                </div>
+                            </>
+                        ) : (
+                            msg.text
+                        )}
+                    </div>
+                ))}
+                <div ref={chatEndRef} />
+            </section>
 
-                <div className="chat-bar">
-                    <input
-                        type="text"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-                        placeholder="Ask FinSync AI..."
-                    />
-                    <button onClick={sendMessage}>➤</button>
-                </div>
-            </main>
+            <div className="chat-bar">
+                <input
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+                    placeholder="Ask FinSync AI..."
+                />
+                <button onClick={sendMessage}>➤</button>
+            </div>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { logout } from '../utils/auth';
-import { Home, ChartBar, Wallet, MessageSquare, Trophy, FileText, LayoutDashboard, LogOut, User } from 'lucide-react';
+import { Home, MessageSquare, Trophy, User, TrendingUp, BrainCircuit, LogOut } from 'lucide-react';
 import './sidebar.css';
 
 export default function Sidebar() {
@@ -14,9 +14,9 @@ export default function Sidebar() {
 
   const menuItems = [
     { path: '/dashboard', label: 'Dashboard', icon: Home },
-    // { path: '/dashboard/analytics', label: 'Analytics', icon: ChartBar },
-    // { path: '/dashboard/wallet', label: 'Wallet', icon: Wallet },
     { path: '/dashboard/agents', label: 'Agent Team', icon: MessageSquare },
+    { path: '/dashboard/chat', label: 'AI Chat', icon: BrainCircuit },
+    { path: '/dashboard/future', label: 'Future Sim', icon: TrendingUp },
     { path: '/reality-lens', label: 'Reality Lens', icon: Trophy },
     { path: '/dashboard/profile', label: 'Profile', icon: User },
   ];
@@ -33,22 +33,25 @@ export default function Sidebar() {
       <nav className="sidebar-nav">
         {menuItems.map((item) => {
           const Icon = item.icon;
+          // Active if exact match, or for dashboard sub-routes
+          const isActive = item.path === '/dashboard'
+            ? location.pathname === '/dashboard' || location.pathname === '/dashboard/'
+            : location.pathname.startsWith(item.path);
           return (
             <Link
               key={item.path}
               to={item.path}
-              className={`nav-item ${location.pathname === item.path ? 'active' : ''}`}
+              className={`nav-item ${isActive ? 'active' : ''}`}
               title={item.label}
             >
-              <Icon size={24} strokeWidth={2} />
-              {/* <span className="nav-label">{item.label}</span> */}
+              <Icon size={22} strokeWidth={2} />
             </Link>
-          )
+          );
         })}
       </nav>
       <div className="sidebar-footer">
         <button onClick={handleLogout} className="logout-button-icon" title="Logout">
-          <LogOut size={24} />
+          <LogOut size={22} />
         </button>
       </div>
     </aside>

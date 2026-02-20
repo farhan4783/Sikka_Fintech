@@ -16,11 +16,15 @@ function App() {
     <>
       <MouseGlow />
       <AnimatedBackground />
-      <Navbar />
-      <Hero />
+      <Navbar onLoginClick={() => setIsLoginModalOpen(true)} />
+      <Hero onGetStarted={() => setIsLoginModalOpen(true)} />
       <Features />
-      <CTASection />
+      <CTASection onGetStarted={() => setIsLoginModalOpen(true)} />
       <Footer />
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
     </>
   )
 }

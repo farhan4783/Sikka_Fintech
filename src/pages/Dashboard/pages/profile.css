@@ -1,6 +1,6 @@
 .profile-page {
-    /* padding: 20px; */
     animation: fadeIn 0.5s ease-out;
+    color: var(--text-primary);
 }
 
 @keyframes fadeIn {
@@ -35,15 +35,22 @@
 
 .bill-card {
     background: var(--bg-card);
+    border: var(--border-card);
     border-radius: 20px;
     padding: 24px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    box-shadow: var(--shadow-card);
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 180px;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.bill-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
 }
 
 .bill-card::before {
@@ -86,7 +93,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #e2e8f0;
+    border: var(--border-card);
+    background: var(--bg-input);
+    color: var(--accent-blue);
 }
 
 .bill-percentage-circle {
@@ -156,6 +165,7 @@
     font-size: 24px;
     font-weight: 700;
     margin: 0;
+    color: var(--text-primary);
 }
 
 .bill-subvalue {
@@ -299,6 +309,7 @@
 
 .invoice-stat-card {
     background: var(--bg-card);
+    border: var(--border-card);
     border-radius: 20px;
     padding: 24px;
     flex: 1;
@@ -307,7 +318,7 @@
     justify-content: center;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    box-shadow: var(--shadow-card);
 }
 
 .invoice-stat-card::before {
@@ -340,11 +351,12 @@
 .stat-icon-wrapper {
     width: 36px;
     height: 36px;
-    background: #edF2f7;
+    background: var(--bg-input);
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--accent-blue);
 }
 
 .stat-title {
@@ -357,6 +369,7 @@
     font-size: 24px;
     font-weight: 700;
     margin: 0;
+    color: var(--text-primary);
 }
 
 .stat-sub {
@@ -368,24 +381,23 @@
 .percentage-text-small {
     font-size: 12px;
     font-weight: 700;
-    background: #f7fafc;
+    background: var(--bg-input);
+    color: var(--text-secondary);
     padding: 4px 8px;
     border-radius: 12px;
-    border: 1px solid #e2e8f0;
+    border: var(--border-card);
 }
 
 
 /* Profile Chart */
 .profile-chart-card {
     background: var(--bg-card);
-    /* Or glass effect as per image with shadow */
+    border: var(--border-card);
     border-radius: 20px;
     padding: 24px;
     height: 100%;
     position: relative;
-    /* backdrop-filter: blur(10px); */
-    /* background: rgba(255, 255, 255, 0.8); */
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    box-shadow: var(--shadow-card);
 }
 
 .chart-header {
@@ -395,18 +407,20 @@
 }
 
 .chart-badge {
-    background: #fff;
+    background: var(--bg-input);
+    color: var(--text-primary);
     padding: 6px 16px;
     border-radius: 8px;
     font-size: 12px;
     font-weight: 600;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: var(--border-card);
 }
 
 
 /* History Bar */
 .profile-history-bar {
     background: var(--bg-card);
+    border: var(--border-card);
     border-radius: 16px;
     padding: 16px 32px;
     display: flex;
@@ -414,7 +428,7 @@
     justify-content: space-between;
     font-size: 14px;
     color: var(--text-secondary);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    box-shadow: var(--shadow-card);
 }
 
 .ph-user {

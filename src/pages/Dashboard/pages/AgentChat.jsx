@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import Sidebar from '../components/Sidebar';
 import Topbar from '../components/Topbar';
 import { chatAPI } from '../utils/api';
 import './dashboard.css';
@@ -94,126 +93,124 @@ export default function AgentChat() {
   };
 
   return (
-    <div className="app-layout">
-      <Sidebar />
-      <div className="main-content">
-        <Topbar title="Agent Chat" />
-        <div className="chat-content">
-          <div className="chat-container">
-            {messages.length === 0 && !loading && (
-              <div style={{
-                textAlign: 'center',
-                padding: '40px 20px',
-                color: 'rgba(255, 255, 255, 0.5)'
-              }}>
-                <h3 style={{ marginBottom: '10px' }}>Welcome to FinSync AI</h3>
-                <p>Ask about investments, budgeting, or financial decisions</p>
-                <p style={{ fontSize: '14px', marginTop: '20px' }}>
-                  Try: "Should I buy Tesla stock?" or "I want to buy a new laptop"
-                </p>
-              </div>
-            )}
+    <>
+      <Topbar title="Agent Chat" />
+      <div className="chat-content">
+        <div className="chat-container">
+          {messages.length === 0 && !loading && (
+            <div style={{
+              textAlign: 'center',
+              padding: '40px 20px',
+              color: 'var(--text-tertiary)'
+            }}>
+              <h3 style={{ marginBottom: '10px' }}>Welcome to FinSync AI</h3>
+              <p>Ask about investments, budgeting, or financial decisions</p>
+              <p style={{ fontSize: '14px', marginTop: '20px' }}>
+                Try: "Should I buy Tesla stock?" or "I want to buy a new laptop"
+              </p>
+            </div>
+          )}
 
-            {messages.map((msg, index) => (
-              <div key={index} className={`chat-message ${msg.type}-message`}>
-                {msg.type === 'user' ? (
-                  <>
-                    <div className="message-avatar user-avatar">👤</div>
-                    <div className="message-bubble user-bubble">
-                      {msg.content}
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="message-avatar agent-avatar">
-                      <span className="agent-icon">
-                        {msg.agentIcon || getAgentInfo(msg.agentType).icon}
-                      </span>
-                    </div>
-                    <div className="message-info">
-                      <div className="agent-name">
-                        {msg.agentName || getAgentInfo(msg.agentType).name}
-                      </div>
-                      <div className="agent-role">
-                        {msg.agentRole || getAgentInfo(msg.agentType).role}
-                      </div>
-                    </div>
-                    <div className={`message-bubble agent-bubble ${getAgentInfo(msg.agentType).color}`}>
-                      {msg.content}
-                    </div>
-                  </>
-                )}
-              </div>
-            ))}
-
-            {loading && (
-              <div className="chat-message agent-message">
-                <div className="message-avatar agent-avatar">
-                  <span className="agent-icon">🎯</span>
-                </div>
-                <div className="message-info">
-                  <div className="agent-name">Analyzing...</div>
-                  <div className="agent-role">Processing your request</div>
-                </div>
-                <div className="message-bubble agent-bubble neutral">
-                  <div className="typing-indicator">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+          {messages.map((msg, index) => (
+            <div key={index} className={`chat-message ${msg.type}-message`}>
+              {msg.type === 'user' ? (
+                <>
+                  <div className="message-avatar user-avatar">👤</div>
+                  <div className="message-bubble user-bubble">
+                    {msg.content}
                   </div>
+                </>
+              ) : (
+                <>
+                  <div className="message-avatar agent-avatar">
+                    <span className="agent-icon">
+                      {msg.agentIcon || getAgentInfo(msg.agentType).icon}
+                    </span>
+                  </div>
+                  <div className="message-info">
+                    <div className="agent-name">
+                      {msg.agentName || getAgentInfo(msg.agentType).name}
+                    </div>
+                    <div className="agent-role">
+                      {msg.agentRole || getAgentInfo(msg.agentType).role}
+                    </div>
+                  </div>
+                  <div className={`message-bubble agent-bubble ${getAgentInfo(msg.agentType).color}`}>
+                    {msg.content}
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
+
+          {loading && (
+            <div className="chat-message agent-message">
+              <div className="message-avatar agent-avatar">
+                <span className="agent-icon">🎯</span>
+              </div>
+              <div className="message-info">
+                <div className="agent-name">Analyzing...</div>
+                <div className="agent-role">Processing your request</div>
+              </div>
+              <div className="message-bubble agent-bubble neutral">
+                <div className="typing-indicator">
+                  <span></span>
+                  <span></span>
+                  <span></span>
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
-            {error && (
-              <div style={{
-                padding: '12px',
-                margin: '10px 0',
-                backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                border: '1px solid rgba(239, 68, 68, 0.3)',
-                borderRadius: '8px',
-                color: '#ef4444',
-                fontSize: '14px'
-              }}>
-                {error}
-              </div>
-            )}
+          {error && (
+            <div style={{
+              padding: '12px',
+              margin: '10px 0',
+              backgroundColor: 'rgba(239, 68, 68, 0.1)',
+              border: '1px solid rgba(239, 68, 68, 0.3)',
+              borderRadius: '8px',
+              color: '#ef4444',
+              fontSize: '14px'
+            }}>
+              {error}
+            </div>
+          )}
 
-            <div ref={messagesEndRef} />
-          </div>
-
-          <form className="chat-input-area" onSubmit={handleSendMessage}>
-            <input
-              type="text"
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              placeholder="Ask about investments, budgeting, or financial decisions..."
-              disabled={loading}
-              style={{
-                flex: 1,
-                padding: '12px 16px',
-                backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: '12px',
-                color: 'white',
-                fontSize: '14px',
-                outline: 'none'
-              }}
-            />
-            <button
-              type="submit"
-              className="chat-input-button"
-              disabled={loading || !inputMessage.trim()}
-              style={{
-                opacity: (loading || !inputMessage.trim()) ? 0.5 : 1,
-                cursor: (loading || !inputMessage.trim()) ? 'not-allowed' : 'pointer'
-              }}
-            >
-              ✨
-            </button>
-          </form>
+          <div ref={messagesEndRef} />
         </div>
+
+        <form className="chat-input-area" onSubmit={handleSendMessage}>
+          <input
+            type="text"
+            value={inputMessage}
+            onChange={(e) => setInputMessage(e.target.value)}
+            placeholder="Ask about investments, budgeting, or financial decisions..."
+            disabled={loading}
+            style={{
+              flex: 1,
+              padding: '12px 16px',
+              backgroundColor: 'var(--bg-input)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '12px',
+              color: 'var(--text-primary)',
+              fontSize: '14px',
+              fontFamily: 'inherit',
+              outline: 'none'
+            }}
+          />
+          <button
+            type="submit"
+            className="chat-input-button"
+            disabled={loading || !inputMessage.trim()}
+            style={{
+              opacity: (loading || !inputMessage.trim()) ? 0.5 : 1,
+              cursor: (loading || !inputMessage.trim()) ? 'not-allowed' : 'pointer'
+            }}
+          >
+            ✨
+          </button>
+        </form>
       </div>
-    </div>
+    </>
   );
 }
