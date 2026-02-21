@@ -8,16 +8,38 @@ export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+
     if (password !== confirmPassword) {
-      alert('Passwords do not match');
+      setError('Passwords do not match.');
       return;
     }
-    signup(name, email, password);
-    navigate('/dashboard');
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters.');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await signup(name, email, password);
+      if (response.success) {
+        navigate('/dashboard');
+      } else {
+        setError(response.message || 'Signup failed. Please try again.');
+      }
+    } catch (err) {
+      setError(err.message || 'Signup failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -28,6 +50,9 @@ export default function Signup() {
             <span className="logo-icon">F</span>
             <span className="logo-text">FinSync AI</span>
           </div>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginTop: '8px' }}>
+            Create your account to get started.
+          </p>
         </div>
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
@@ -39,6 +64,7 @@ export default function Signup() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your full name"
               required
+              disabled={loading}
             />
           </div>
           <div className="form-group">
@@ -50,6 +76,7 @@ export default function Signup() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
+              disabled={loading}
             />
           </div>
           <div className="form-group">
@@ -59,8 +86,9 @@ export default function Signup() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Create a password"
+              placeholder="Create a password (min 6 chars)"
               required
+              disabled={loading}
             />
           </div>
           <div className="form-group">
@@ -72,9 +100,20 @@ export default function Signup() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm your password"
               required
+              disabled={loading}
             />
           </div>
-          <button type="submit" className="login-button">Sign Up</button>
+
+          {error && (
+            <div className="auth-error">
+              {error}
+            </div>
+          )}
+
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? 'Creating account...' : 'Sign Up'}
+          </button>
+
           <div className="auth-link">
             Already have an account? <Link to="/login">Login</Link>
           </div>

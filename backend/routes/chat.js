@@ -1,14 +1,14 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
+const { sendMessage, getHistory, analyzeStock, analyzeSpending } = require('../controllers/chat');
+const { authMiddleware } = require('../middleware/auth');
 
-router.post("/chat", (req, res) => {
-  console.log("HEADERS:", req.headers);
-  console.log("BODY:", req.body);
+// All chat routes are protected
+router.use(authMiddleware);
 
-  res.json({
-    receivedBody: req.body,
-    receivedHeaders: req.headers,
-  });
-});
+router.post('/', sendMessage);
+router.get('/history', getHistory);
+router.post('/stock-analysis', analyzeStock);
+router.post('/spending-analysis', analyzeSpending);
 
 module.exports = router;

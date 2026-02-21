@@ -1,15 +1,17 @@
-import { getToken, getUser, removeToken, setToken } from './api';
+import { getToken, getUser, removeToken, setToken, setUser, authAPI } from './api';
 
 export const isAuthenticated = () => {
   return !!getToken();
 };
 
-export const login = () => {
-  setToken('demo_token');
+export const login = async (email, password) => {
+  const response = await authAPI.login({ email, password });
+  return response;
 };
 
-export const signup = (name, email, password) => {
-  setToken('demo_token');
+export const signup = async (name, email, password) => {
+  const response = await authAPI.signup({ name, email, password });
+  return response;
 };
 
 export const getUserData = () => {
@@ -18,6 +20,5 @@ export const getUserData = () => {
 
 export const logout = () => {
   removeToken();
-  window.location.href = 'http://localhost:5173';
+  window.location.href = '/login';
 };
-

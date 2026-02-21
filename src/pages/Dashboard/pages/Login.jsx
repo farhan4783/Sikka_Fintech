@@ -4,14 +4,29 @@ import { login } from '../utils/auth';
 import '../index.css';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('demo@finsync.ai');
+  const [password, setPassword] = useState('password123');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login();
-    navigate('/dashboard');
+    setError('');
+    setLoading(true);
+
+    try {
+      const response = await login(email, password);
+      if (response.success) {
+        navigate('/dashboard');
+      } else {
+        setError(response.message || 'Login failed. Please try again.');
+      }
+    } catch (err) {
+      setError(err.message || 'Login failed. Please check your credentials.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -22,6 +37,9 @@ export default function Login() {
             <span className="logo-icon">F</span>
             <span className="logo-text">FinSync AI</span>
           </div>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginTop: '8px' }}>
+            Welcome back! Sign in to your account.
+          </p>
         </div>
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
@@ -33,6 +51,7 @@ export default function Login() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
+              disabled={loading}
             />
           </div>
           <div className="form-group">
@@ -44,9 +63,25 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               required
+              disabled={loading}
             />
           </div>
-          <button type="submit" className="login-button">Login</button>
+
+          {error && (
+            <div className="auth-error">
+              {error}
+            </div>
+          )}
+
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? 'Signing in...' : 'Login'}
+          </button>
+
+          <div className="auth-hint">
+            <span>Demo: </span>
+            <code>demo@finsync.ai</code> / <code>password123</code>
+          </div>
+
           <div className="auth-link">
             Don't have an account? <Link to="/signup">Sign Up</Link>
           </div>
